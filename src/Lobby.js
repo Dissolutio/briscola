@@ -99,11 +99,11 @@ class Lobby extends Component {
       );
     }
   };
-  getPlayerItem = (player) => {
+  getPlayerItem = (player, index) => {
     if (player) {
       if (player.id === this.state.myID) {
         return (
-          <div>
+          <div key={index}>
             <div className="player-item">
               <Trans>You [connected]</Trans>
               <div className="player-ready"></div>
@@ -112,7 +112,7 @@ class Lobby extends Component {
         );
       } else {
         return (
-          <div>
+          <div key={index}>
             <div className="player-item">
               {player.name}
               <div className="player-ready"></div>
@@ -122,7 +122,7 @@ class Lobby extends Component {
       }
     } else {
       return (
-        <div>
+        <div key={index}>
           <div id="bars1">
             <span></span>
             <span></span>
@@ -179,10 +179,16 @@ class Lobby extends Component {
         </Trans>
         <div className="game-code">{this.state.id}</div>:
         <div className="player-list">
-          {players.map((p) => {
-            const joinedPlayer = this.state.joined[p];
-            return this.getPlayerItem(joinedPlayer);
-          })}
+          {players.map(
+            (
+              p,
+              // passing index for React Key for items rendered by getPlayerItem
+              i
+            ) => {
+              const joinedPlayer = this.state.joined[p];
+              return this.getPlayerItem(joinedPlayer, i);
+            }
+          )}
         </div>
       </>
     );
