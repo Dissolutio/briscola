@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { SocketIO } from 'boardgame.io/multiplayer';
-import { Client } from 'boardgame.io/react';
-import './styles/lobby.css';
-import { LobbyAPI } from './api.js';
-import { Briscola } from './gameLogic.js';
-import Board from './Board.js';
-import TemplatePage from './TemplatePage.js';
-import { GAME_SERVER_URL, APP_PRODUCTION } from './config.js';
-import { Trans } from 'react-i18next';
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import { SocketIO } from "boardgame.io/multiplayer";
+import { Client } from "boardgame.io/react";
+import "../styles/lobby.css";
+import { LobbyAPI } from "../api.js";
+import { Briscola } from "../gameLogic.js";
+import Board from "../Board.js";
+import TemplatePage from "./TemplatePage.js";
+import { GAME_SERVER_URL, APP_PRODUCTION } from "../config.js";
+import { Trans } from "react-i18next";
 
 const api = new LobbyAPI();
 const server = APP_PRODUCTION
@@ -26,7 +26,7 @@ class RematchLobby extends Component {
   state = {};
   constructor(props) {
     super(props);
-    console.log('Creating rematch lobby');
+    console.log("Creating rematch lobby");
     this.state.id = null;
     this.state.joined = [];
     this.state.myID = null;
@@ -35,32 +35,34 @@ class RematchLobby extends Component {
   componentDidMount() {
     this.playAgain();
     this.interval = setInterval(this.checkRoomState, 1000);
-    window.addEventListener('beforeunload', this.cleanup.bind(this));
+    window.addEventListener("beforeunload", this.cleanup.bind(this));
   }
   cleanup() {
-    console.log('Cleaning up');
+    console.log("Cleaning up");
     api.leaveRoom(this.state.id, this.state.myID, this.state.userAuthToken);
     clearInterval(this.interval);
   }
   componentWillUnmount() {
-    window.removeEventListener('beforeunload', this.cleanup.bind(this));
+    window.removeEventListener("beforeunload", this.cleanup.bind(this));
   }
   playAgain = () => {
-    api.playAgain(...this.props.location.playAgainPayload).then((value) => {
-      this.setState({ id: value }, () => {
-        this.checkRoomStateAndJoin();
+    if (this.props.location.playAgainPayload) {
+      api.playAgain(...this.props.location.playAgainPayload).then((value) => {
+        this.setState({ id: value }, () => {
+          this.checkRoomStateAndJoin();
+        });
+        console.log(
+          "Promise returned value which will become the new match ID: " + value
+        );
       });
-      console.log(
-        'Promise returned value which will become the new match ID: ' + value
-      );
-    });
+    }
   };
   joinRoom = (player_no) => {
-    const username = 'Player ' + player_no;
+    const username = "Player " + player_no;
     if (this.state.id) {
       api.joinRoom(this.state.id, username, player_no).then(
         (authToken) => {
-          console.log('Joined the room. Your id is: ', player_no);
+          console.log("Joined the room. Your id is: ", player_no);
           this.setState({ myID: player_no, userAuthToken: authToken });
         },
         (error) => {
@@ -70,7 +72,7 @@ class RematchLobby extends Component {
     }
   };
   checkRoomStateAndJoin = () => {
-    console.log('Checking room state.');
+    console.log("Checking room state.");
     if (this.state.id) {
       api.whosInRoom(this.state.id).then(
         (players) => {
@@ -83,7 +85,7 @@ class RematchLobby extends Component {
           this.joinRoom(myPlayerNum);
         },
         (error) => {
-          console.log('Room does not exist.');
+          console.log("Room does not exist.");
           this.setState({
             id: null,
           });
@@ -101,7 +103,7 @@ class RematchLobby extends Component {
           });
         },
         (error) => {
-          console.log('Room does not exist.');
+          console.log("Room does not exist.");
           this.setState({
             id: null,
           });

@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { SocketIO } from 'boardgame.io/multiplayer';
 import { Client } from 'boardgame.io/react';
-import './styles/lobby.css';
+
 import { LobbyAPI } from './api.js';
 import { Briscola } from './gameLogic.js';
 import Board from './Board.js';
-import TemplatePage from './TemplatePage.js';
-import { WEB_SERVER_URL, GAME_SERVER_URL, APP_PRODUCTION } from './config.js';
+import { TemplatePage } from './briscola-ui';
 import { Trans } from 'react-i18next';
+import { WEB_SERVER_URL, GAME_SERVER_URL, APP_PRODUCTION } from './config.js';
+import './styles/lobby.css';
 
 const api = new LobbyAPI();
 const server = APP_PRODUCTION

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import './styles/homePage.css';
-import { LobbyAPI } from './api.js';
+import '../styles/homePage.css';
+import { LobbyAPI } from '../api.js';
 import TemplatePage from './TemplatePage.js';
 import { Trans } from 'react-i18next';
 

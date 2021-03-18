@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { denari, spade, coppe, bastoni } from './cards.js';
+import { denari, spade, coppe, bastoni } from '../cards.js';
 import Modal from 'react-modal';
 import { Trans, useTranslation } from 'react-i18next';
 Modal.setAppElement('#root');

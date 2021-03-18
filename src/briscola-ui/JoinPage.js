@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import TemplatePage from './TemplatePage.js';
-import './styles/joinPage.css';
+import '../styles/joinPage.css';
 import { withTranslation } from 'react-i18next';
 
 class JoinPage extends Component {

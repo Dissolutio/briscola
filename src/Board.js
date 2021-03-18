@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import Hero from './Hero.js';
-import Villain from './Villain.js';
-import Middle from './Middle.js';
-import HelpModal from './HelpModal.js';
-import PreviousTrick from './PreviousTrick.js';
-import Chat from './Chat.js';
+import {
+  Hero,
+  Villain,
+  Middle,
+  HelpModal,
+  PreviousTrick,
+  Chat,
+} from './briscola-ui';
 import './styles/board.css';
 import { Trans } from 'react-i18next';
 

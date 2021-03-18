@@ -1,14 +1,13 @@
 import React from 'react';
 import { Switch, Route, useHistory } from 'react-router';
-import Lobby from './Lobby.js';
 import { Client } from 'boardgame.io/react';
+import { Local } from 'boardgame.io/multiplayer';
+import { Debug } from 'boardgame.io/debug';
+
 import { Briscola } from './gameLogic.js';
 import Board from './Board.js';
-import { Local } from 'boardgame.io/multiplayer';
-import HomePage from './HomePage.js';
-import JoinPage from './JoinPage.js';
-import RematchLobby from './RematchLobby.js';
-import { Debug } from 'boardgame.io/debug';
+import Lobby from './Lobby.js';
+import { HomePage, JoinPage, RematchLobby } from './briscola-ui';
 
 function App() {
   const history = useHistory();

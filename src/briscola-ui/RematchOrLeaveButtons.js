@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Trans } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
-export default function LiveButtons({ delay, handID, gameData }) {
+export default function RematchOrLeaveButtons({ delay, handID, gameData }) {
   const [isHidden, setIsHidden] = useState(true);
   const hero = handID;
   const villainID = !parseFloat(hero) ? 1 : 0;
